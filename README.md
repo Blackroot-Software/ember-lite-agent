@@ -8,14 +8,14 @@
 
 `ember-lite-agent/`
 
-* `cmd/` :arrow_right: Entrypoints: main agent stager(s), local stubs
-* `core/` :arrow_right: Runtime: scheduler, task loop, internal state
-* `comms/` :arrow_right: Communication: beacon logic, transport profiles
-* `tasks/` :arrow_right: Action Modules: discrete functional payloads
-* `cbridge/` :arrow_right: Native Bridge: C syscall hooks, shellcode loaders
-* `utils/` :arrow_right: Crypto, encoding, evasion tools, profile support
-* `test/` :arrow_right: Unit + integration testing in safe environments
-* `docs/` :arrow_right: Architecture notes, diagrams, config explanations
+* `cmd/` :arrow_right: Entrypoints: main agent stager(s), local stubs.
+* `core/` :arrow_right: Runtime: scheduler, task loop, internal state.
+* `comms/` :arrow_right: Communication: beacon logic, transport profiles.
+* `tasks/` :arrow_right: Action Modules: discrete functional payloads.
+* `cbridge/` :arrow_right: Native Bridge: C syscall hooks, shellcode loaders.
+* `utils/` :arrow_right: Crypto, encoding, evasion tools, profile support.
+* `test/` :arrow_right: Unit + integration testing in safe environments.
+* `docs/` :arrow_right: Architecture notes, diagrams, config explanations.
 
 ## 📦 Component Breakdown
 
@@ -119,10 +119,10 @@ These packages are stateless and importable across other modules.
 
 ## ⚙️ Development Stack
 
-- **Language**: Go (`1.21+`) for transport, logic, and concurrency
-- **Interop**: C (`cgo`) for syscall and shellcode bridge
-- **Build Targets**: Primarily Windows (`amd64`), Linux support optional
-- **Design Priority**: Stealth > Speed > Features
+- **Language**: Go (`1.21+`) for transport, logic, and concurrency.
+- **Interop**: C (`cgo`) for syscall and shellcode bridge.
+- **Build Targets**: Primarily Windows (`amd64`), Linux support optional.
+- **Design Priority**: Stealth > Speed > Features.
 
 ## 🌐 Philosophy
 *Build what others are afraid to document.*
