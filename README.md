@@ -6,7 +6,7 @@
 
 #### Mock Directory Structure:
 
-ember-lite-agent/
+`ember-lite-agent/`
 
 * `cmd/` :arrow_right: Entrypoints: main agent stager(s), local stubs
 * `core/` :arrow_right: Runtime: scheduler, task loop, internal state
