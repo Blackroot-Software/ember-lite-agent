@@ -1,6 +1,6 @@
-# ember-lite-agent  
+Blackroot Systems Development
 
-### **Blackroot Systems Development**  
+## **ember-lite-agent**  
 *A modular, low-profile C2 agent for persistent command execution, transport control, and stealthy post-exploitation — designed for integration within the Blackroot offensive ecosystem.*
 
 
