@@ -1,51 +1,143 @@
 # ember-lite-agent  
 
-**Blackroot Systems Development**  
+### **Blackroot Systems Development**  
 *A modular, low-profile C2 agent for persistent command execution, transport control, and stealthy post-exploitation — designed for integration within the Blackroot offensive ecosystem.*
 
-## Operational Directive
 
-> `ember-lite-agent` is the preliminary execution vector in the Ember module chain. It is built to deliver deterministic control over target systems without compromise to operational security. Designed for field-grade performance: silent load, rapid task response, and total environmental compatibility.  
->
-> This agent does not assume—  
-> It listens, receives, executes, and disappears.
+#### Mock Directory Structure:
 
+ember-lite-agent/
 
-## Technical Overview
+* `cmd/` :arrow_right: Entrypoints: main agent stager(s), local stubs
+* `core/` :arrow_right: Runtime: scheduler, task loop, internal state
+* `comms/` :arrow_right: Communication: beacon logic, transport profiles
+* `tasks/` :arrow_right: Action Modules: discrete functional payloads
+* `cbridge/` :arrow_right: Native Bridge: C syscall hooks, shellcode loaders
+* `utils/` :arrow_right: Crypto, encoding, evasion tools, profile support
+* `test/` :arrow_right: Unit + integration testing in safe environments
+* `docs/` :arrow_right: Architecture notes, diagrams, config explanations
 
-`ember-lite-agent` provides a hardened runtime for deployment under constrained or monitored conditions. It is the first system link in chained access operations. Architected to be platform-flexible, memory-aware, and resistant to conventional analysis.
+## 📦 Component Breakdown
 
-### Capabilities
+### `cmd/`
+**Purpose**: Entrypoints for building and executing the agent.
 
-- Memory-resident agent core (optional disk fallbacks)
-- Stateless beaconing w/ randomized profile timing
-- Modular task ingestion and command queue
-- Comms abstraction layer: HTTP[S], DNS, radio, local transport
-- Integration-ready with `mantle`, `hollow`, and `coil` subsystems
-- C-interop via syscall bridge and native extensions
+- Contains `main.go` or multiple staging entrypoints.
+- May include launchers, debug flags, or internal test agents.
+- Optional local stubs for simulation without C2.
 
-## Architecture Layout
+<hr>
+
+### `core/`
+**Purpose**: Runtime loop, state management, kill-switches.
+
+- Core task scheduler.
+- Orchestrates command input, response output.
+- Includes error tolerance, sleep intervals, beacon timers.
+- Handles panic recovery or fallback beacons.
+
+<hr>
+
+### `comms/`
+**Purpose**: Beaconing, encoding, jitter control, and protocol logic.
+
+- Transport-agnostic C2 handling.
+- Profiles for HTTP(S), DNS, or custom covert channels.
+- Manages encryption before outbound exfil.
+- Implements jitter, random delay, and retry patterns.
+- May support optional pivot routing or SOCKS proxy chaining.
+
+<hr>
+
+### `tasks/`
+**Purpose**: Modular functional payloads. Tasks are dispatched from the server, executed client-side, and return encoded results.
+
+Examples:
+- `exec.go` – Remote shell command execution.
+- `inject.go` – DLL/shellcode injection into live processes.
+- `exfil.go` – File/data upload with chunking support.
+- `screenshot.go` – Basic framebuffer grabbing.
+- `persist.go` – Registry/autorun modifications or WMI triggers.
+
+Each task is isolated and invoked via a dispatcher in `core/`.
+
+<hr>
+
+### `cbridge/`
+**Purpose**: Native interaction layer via `cgo` and C-based syscall logic.
+
+- Used for memory-resident payloads, process hollowing, reflective loading.
+- Supports low-level syscall invocation (e.g., `NtCreateThreadEx`, `VirtualAllocEx`, `QueueUserAPC`).
+- Enables indirect system call resolution or obfuscation.
+- Can be expanded to support raw shellcode runners or reflective DLL execution.
+
+Ideal for agents requiring stealth and memory-only execution.
+
+<hr>
+
+### `utils/`
+**Purpose**: Core helper modules and support functions.
+
+- `aes.go`, `xor.go` – Payload encryption and beacon obfuscation.
+- `uuid.go`, `identity.go` – Beacon ID generation and agent tagging.
+- `encode.go` – Base64, Gzip, custom XOR pad shufflers.
+- `stealth.go` – Functions for sleep masking, API hashing, or timing jitter.
+
+These packages are stateless and importable across other modules.
+
+<hr>
+
+### `test/`
+**Purpose**: Validation, local simulation, and integration.
+
+- Sandboxed echo test servers.
+- Controlled beacon task runners for QA.
+- Payload test harnesses and C2 replay test cases.
+- May include containerized stubs or replayed traffic analysis.
+
+<hr>
+
+### `docs/`
+**Purpose**: Internal operational and technical documentation.
+
+- Beacon timing diagrams.
+- Command formats and response schema.
+- Notes on encryption keys, session bootstrap, and transport profile structure.
+- Task packet examples and raw JSON definitions.
+
+<hr>
+
+## 🔥 Project Scope
+
+`ember-lite-agent` is designed to:
+- Operate independently or within a larger modular C2 framework.
+- Support multiple encrypted, jittered transport profiles.
+- Perform memory-resident payload operations without touching disk.
+- Offer quick task module swapping for rapid operation shifts.
+- Scale across Windows systems with optional Linux expansion.
+- Eventually be paired with upstream Blackroot modules like `Mantle` and `Coil`.
+
+## ⚙️ Development Stack
+
+- **Language**: Go (`1.21+`) for transport, logic, and concurrency
+- **Interop**: C (`cgo`) for syscall and shellcode bridge
+- **Build Targets**: Primarily Windows (`amd64`), Linux support optional
+- **Design Priority**: Stealth > Speed > Features
+
+## 🌐 Philosophy
+*Build what others are afraid to document.*
+  
+> `ember-lite-agent` is not a PoC. It is the foundation of a real offensive framework built for long-term development, control, and operational elegance — designed to reflect discipline, precision, and leverage.
+
+## 📌 Status
+
+> **[ DRAFT / DESIGN PHASE ]**  
+This repository is currently being scoped and structured. Implementation will follow after foundational planning, testing, and modular validation.
 
 ---
 
-## Development Roadmap
+## 🕶️ Author
 
-| Phase     | Objective                                           |
-|-----------|-----------------------------------------------------|
-| Phase I   | Memory-safe core loop, manual task ingestion        |
-| Phase II  | Dynamic task loader, staging buffer & exec control |
-| Phase III | Comm profiles (rotating beaconing + FQDN routing)  |
-| Phase IV  | Native syscall ops, inline injection, AMSI/ETW R&D |
-| Phase V   | Embedded cryptographic transport + live operator CLI|
+Malachi (Lead Engineer) @ `Blackroot Software`  
 
-All phases are modular — completion does not imply public release or dependency on full-chain tooling.
-
----
-
-## Deployment Context
-
-This project is a **precision access component**. It is not generalized. It assumes control over execution, memory layout, and comms timing. Developed for infrastructure that does not allow second attempts.
-
-## Compliance
-
-> This software is developed exclusively for lawful simulation, research, and red team application under contractual engagement or controlled lab environments. Unauthorized usage is prohibited.
+📡 *Offensive Engineering. Tactical Autonomy. Beyond Surface Control.*  
