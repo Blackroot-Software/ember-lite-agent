@@ -138,6 +138,6 @@ This repository is currently being scoped and structured. Implementation will fo
 
 ## 🕶️ Author
 
-Malachi (Lead Engineer) @ `Blackroot Software`  
+Malachi (Founder & Lead Systems Architect) @ `Blackroot Software`  
 
 📡 *Offensive Engineering. Tactical Autonomy. Beyond Surface Control.*  
