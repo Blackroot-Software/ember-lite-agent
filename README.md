@@ -138,6 +138,6 @@ This repository is currently being scoped and structured. Implementation will fo
 
 ## 🕶️ Author
 
-PlatinumVoyager (Founder & Lead Systems Architect) @ `Blackroot Software`  
+[PlatinumVoyager](https://github.com/PlatinumVoyager) (Founder & Lead Systems Architect) @ `Blackroot Software`  
 
 📡 *Offensive Engineering. Tactical Autonomy. Beyond Surface Control.*  
