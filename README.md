@@ -12,11 +12,3 @@ Blackroot Systems Development
 
 > **[ DRAFT / DESIGN PHASE ]**  
 This repository is currently being scoped and structured. Implementation will follow after foundational planning, testing, and modular validation.
-
----
-
-## 🕶️ Author
-
-[PlatinumVoyager](https://github.com/PlatinumVoyager) (Founder & Lead Systems Architect) @ `Blackroot Software`  
-
-📡 *Offensive Engineering. Tactical Autonomy. Beyond Surface Control.*  
